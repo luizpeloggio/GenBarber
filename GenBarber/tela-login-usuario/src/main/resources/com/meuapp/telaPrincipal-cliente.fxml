@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.Region?>
+
+
+<VBox alignment="CENTER" spacing="10.0"
+      xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.meuapp.telaPrincipalCliente">
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <children>
+
+        <HBox alignment="CENTER" spacing="40">
+
+            <!-- LOGO -->
+
+            <VBox alignment="CENTER_LEFT" spacing="15.0" style="-fx-padding: 5px 10px;">
+                <StackPane styleClass="logo" alignment="CENTER">
+                <ImageView fx:id="imageViewCliente"
+                        fitHeight="160.0" fitWidth="160.0"
+                        pickOnBounds="true" preserveRatio="true">
+                    <Image url="@genBarber-Photoroom.png" />
+                </ImageView>
+            </StackPane>
+            </VBox>
+
+            <Region fx:id="spacer" HBox.hgrow="ALWAYS"/>
+
+            <!-- ÁREA DE BUSCA -->
+            <HBox spacing="15" alignment="CENTER_RIGHT">
+                <children>
+                    <TextField fx:id="txtBuscaBarbeiro"
+                            promptText="Buscar"
+                            prefWidth="250" />
+                    <Button text="Buscar" onAction="#handleBuscarBarbeiro"
+                            style="-fx-background-color: #2196F3; -fx-text-fill: white;" />
+                </children>
+            </HBox>
+
+        </HBox>
+
+        <!-- SERVIÇOS -->
+        <VBox styleClass="container" spacing="5.0" alignment="CENTER">
+            <children>
+                <VBox spacing="15" alignment="CENTER_LEFT">
+
+                    <Label text="Opções de serviço"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                    <HBox spacing="10" alignment="CENTER" styleClass="servicos">
+
+                        <VBox spacing="8" alignment="CENTER">
+                            <ImageView fx:id="imgFeminino" fitHeight="90" fitWidth="90" preserveRatio="false" pickOnBounds="true" styleClass="imagemServico">
+                                <image><Image url="@corte-feminino.jpg" /></image>
+                            </ImageView>
+                            <Label text="Feminino" />
+                        </VBox>
+
+                        <VBox spacing="8" alignment="CENTER">
+                            <ImageView fx:id="imgInfantil" fitHeight="90" fitWidth="90" preserveRatio="false" pickOnBounds="true" styleClass="imagemServico">
+                                <image><Image url="@corte-infantil.jpg" /></image>
+                            </ImageView>
+                            <Label text="Infantil" />
+                        </VBox>
+
+                        <VBox spacing="8" alignment="CENTER">
+                            <ImageView fx:id="imgMasculino" fitHeight="90" fitWidth="90" preserveRatio="false" pickOnBounds="true" styleClass="imagemServico">
+                                <image><Image url="@corte-masculino.jpg" /></image>
+                            </ImageView>
+                            <Label text="Masculino" />
+                        </VBox>
+
+                        <VBox spacing="8" alignment="CENTER">
+                            <ImageView fx:id="imgBarba" fitHeight="90" fitWidth="90" preserveRatio="false" pickOnBounds="true" styleClass="imagemServico">
+                                <image><Image url="@barba.jpg" /></image>
+                            </ImageView>
+                            <Label text="Barba" />
+                        </VBox>
+
+                    </HBox>
+                </VBox>
+            </children>
+        </VBox>
+
+        <!-- ESTABELECIMENTOS -->
+        <VBox styleClass="container" spacing="5.0" alignment="CENTER">
+            <children>
+                <VBox spacing="15" alignment="CENTER_LEFT">
+
+                    <Label text="Estabelecimentos"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                    <HBox spacing="20" alignment="CENTER" styleClass="servicos">
+
+                        <VBox spacing="8" alignment="CENTER">
+                            <ImageView fx:id="salao1" fitHeight="180" fitWidth="180">
+                                <image><Image url="@salaoBeleza1.jpg" /></image>
+                            </ImageView>
+                            <Label text="Estabelecimento:" />
+                            <Label text="SombranSheila" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                        </VBox>
+
+                        <VBox spacing="8" alignment="CENTER">
+                            <ImageView fx:id="salao2" fitHeight="180" fitWidth="180">
+                                <image><Image url="@salaoBeleza2.jpg" /></image>
+                            </ImageView>
+                            <Label text="Estabelecimento:" />
+                            <Label text="Cortando na Alta" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                        </VBox>
+
+                        <VBox spacing="8" alignment="CENTER">
+                            <ImageView fx:id="salao3" fitHeight="180" fitWidth="180">
+                                <image><Image url="@salaoBeleza3.jpg" /></image>
+                            </ImageView>
+                            <Label text="Estabelecimento:" />
+                            <Label text="Cresce de novo" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                        </VBox>
+
+                    </HBox>
+
+                </VBox>
+            </children>
+        </VBox>
+
+        <!-- MENU INFERIOR -->
+        <VBox styleClass="container-footer" spacing="5.0" alignment="CENTER">
+            <children>
+
+                <HBox spacing="20" alignment="CENTER" styleClass="servicos">
+
+                    <VBox spacing="8" alignment="CENTER">
+                        <ImageView fx:id="casa1" fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image><Image url="@casa.png" /></image>
+                        </ImageView>
+                    </VBox>
+
+                    <VBox spacing="8" alignment="CENTER">
+                        <ImageView fx:id="menu1" fitHeight="20" fitWidth="20" preserveRatio="true" pickOnBounds="true" onMouseClicked="#abrirMenuCliente">
+                            <image><Image url="@menu.png" /></image>
+                        </ImageView>
+                    </VBox>
+
+                    <VBox spacing="8" alignment="CENTER">
+                        <ImageView fx:id="compras1" fitHeight="20" fitWidth="20" preserveRatio="true" pickOnBounds="true" onMouseClicked="#abrirComprasCliente">
+                            <image><Image url="@carrinho-de-compras.png" /></image>
+                        </ImageView>
+                    </VBox>
+
+                    <VBox spacing="8" alignment="CENTER">
+                        <ImageView fx:id="perfil1" fitHeight="20" fitWidth="20" preserveRatio="true" pickOnBounds="true" onMouseClicked="#abrirPerfilCliente">
+                            <image><Image url="@perfil.png" /></image>
+                        </ImageView>
+                    </VBox>
+
+                    <VBox spacing="8" alignment="CENTER">
+                        <ImageView fx:id="configuracao1" fitHeight="20" fitWidth="20" preserveRatio="true" pickOnBounds="true" onMouseClicked="#abrirConfiguracaoCliente">
+                            <image><Image url="@configuracao.png" /></image>
+                        </ImageView>
+                    </VBox>
+
+                </HBox>
+
+            </children>
+        </VBox>
+
+    </children>
+
+</VBox>
+

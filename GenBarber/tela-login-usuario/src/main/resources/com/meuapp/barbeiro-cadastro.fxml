@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.TextField?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.meuapp.barbeiroCadastroController">
+    <children>
+        <VBox alignment="CENTER" spacing="10.0">
+                <StackPane styleClass="logo">
+                    <ImageView fx:id="imageViewCliente" fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                        <image><Image url="@genBarber-Photoroom.png" /></image>
+                    </ImageView>
+                </StackPane>
+            </VBox>
+
+        <Label text="Insira os seus dados abaixo."/>
+
+        <TextField styleClass="inputTextFile" fx:id="nameField" promptText="Nome completo" />
+
+        <TextField styleClass="inputTextFile" fx:id="emailField" promptText="email@domain.com" />
+
+        <TextField styleClass="inputTextFile" fx:id="phoneField" promptText="(XX) XXXXX-XXXX" />
+
+        <TextField styleClass="inputTextFile" fx:id="passwordField" promptText="Digite sua senha" />
+        
+        <TextField styleClass="inputTextFile" fx:id="passwordField" promptText="Digite novamente sua senha" />
+
+        <Button styleClass="buttonContinue" fx:id="registerBarbeiro" text="Continue" onAction="#cadastroBarbeiro2" />
+
+        <Button styleClass="buttonContinue" fx:id="registerBarbeiro" text="Voltar" onAction="#secondary" />
+
+    </children>
+</VBox>
