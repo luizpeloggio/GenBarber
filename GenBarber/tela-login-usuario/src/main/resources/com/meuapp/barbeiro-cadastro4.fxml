@@ -40,7 +40,9 @@
             </HBox>
         </VBox>
 
+                <Button styleClass="buttonContinue" text="Continuar" onAction="#telaPrincipalBarbeiro1" />
                 <Button styleClass="buttonContinue" fx:id="registerBarbeiro" text="Voltar" onAction="#cadastroBarbeiro3" />
+
 
         </children>
 </VBox>

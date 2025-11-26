@@ -55,12 +55,21 @@
     -fx-max-width: 300px;
     -fx-border-radius: 10px;
 }
+
 .buttonVisitar{
     -fx-background-color: #000000;
     -fx-text-fill: #FFFFFF;
     -fx-padding: 10px;
     -fx-min-width: 100px;
     -fx-max-width: 100px;
+    -fx-border-radius: 10px;
+}
+.button{
+    -fx-background-color: #000000;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-min-width: 130px;
+    -fx-max-width: 130px;
     -fx-border-radius: 10px;
 }
 /* Botão transparente */

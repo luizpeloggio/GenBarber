@@ -28,7 +28,7 @@
 
       <TextField styleClass="inputTextFile" fx:id="passwordField" promptText="Digite sua senha" />
       
-      <Button styleClass="buttonContinue" fx:id="primaryButton" text="Continue" />
+      <Button styleClass="buttonContinue" fx:id="primaryButton" text="Continue" onAction="#login"/>
 
       <Label text="Já tem uma conta?"/>
 

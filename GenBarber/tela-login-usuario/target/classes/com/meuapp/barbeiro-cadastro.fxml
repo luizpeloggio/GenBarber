@@ -28,6 +28,8 @@
 
         <TextField styleClass="inputTextFile" fx:id="phoneField" promptText="(XX) XXXXX-XXXX" />
 
+        <TextField styleClass="inputTextFile" fx:id="cpfField" promptText="000.000.000-00" />
+
         <TextField styleClass="inputTextFile" fx:id="passwordField" promptText="Digite sua senha" />
         
         <TextField styleClass="inputTextFile" fx:id="passwordField" promptText="Digite novamente sua senha" />
