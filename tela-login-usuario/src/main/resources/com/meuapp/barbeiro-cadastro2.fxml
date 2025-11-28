@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.StackPane?> 
+
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.meuapp.barbeiroCadastro2Controller">
+    <children>
+        <VBox alignment="CENTER" spacing="10.0">
+                <StackPane styleClass="logo">
+                    <ImageView fx:id="imageViewCliente" fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                        <image><Image url="@genBarber-Photoroom.png" /></image>
+                    </ImageView>
+                </StackPane>
+        </VBox>
+
+        <Label text="Agora nos diga seu endereço."/>
+
+        <VBox spacing="5.0" alignment="CENTER">
+            <Label text="Selecione seu estado:"/> 
+            <ComboBox fx:id="estadoComboBox" promptText="Selecione o Estado" styleClass="estiloEndereco"/>
+        </VBox>
+        
+        <VBox spacing="5.0" alignment="CENTER">
+            <Label text="Selecione sua cidade:"/> 
+            <ComboBox fx:id="cidadeComboBox" promptText="Cidade" disable="true" styleClass="estiloEndereco"/>
+        </VBox>
+
+
+        <TextField styleClass="inputTextFile" fx:id="addressField" promptText="Logradouro" />
+
+        <Button styleClass="buttonContinue" fx:id="registerBarbeiro" text="Continue" onAction="#cadastroBarbeiro3" />
+
+        <Button styleClass="buttonContinue" fx:id="registerBarbeiro" text="Voltar" onAction="#cadastroBarbeiro" />
+
+    </children>
+</VBox>

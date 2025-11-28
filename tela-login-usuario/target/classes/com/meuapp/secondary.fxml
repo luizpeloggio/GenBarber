@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.meuapp.SecondaryController">
+    <children>
+
+        <VBox alignment="CENTER" spacing="10.0">
+                <StackPane styleClass="logo">
+                    <ImageView fx:id="imageViewCliente" fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                        <image><Image url="@genBarber-Photoroom.png" /></image>
+                    </ImageView>
+                </StackPane>
+            </VBox>
+
+        <Label text="Escolha o tipo de conta"/>
+
+        <HBox alignment="CENTER" spacing="50.0"> <VBox alignment="CENTER" spacing="10.0">
+                <StackPane styleClass="imagem">
+                    <ImageView fx:id="imageViewBarbeiro" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#abrirTelaBarbeiro">
+                        <image><Image url="@barbeiro.png" /></image>
+                    </ImageView>
+                </StackPane>
+                <Label text="Barbeiro"/>
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="10.0">
+                <StackPane styleClass="imagem">
+                    <ImageView fx:id="imageViewCliente" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#abrirTelaCliente">
+                        <image><Image url="@cliente.png" /></image>
+                    </ImageView>
+                </StackPane>
+                <Label text="Cliente"/>
+            </VBox>
+            
+        </HBox>
+
+        <Button styleClass="buttonContinue" fx:id="secondaryButton" text="Voltar" onAction="#switchToPrimary" />
+    </children>
+</VBox>

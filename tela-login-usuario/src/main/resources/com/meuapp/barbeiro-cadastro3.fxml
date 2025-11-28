@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.TextField?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.meuapp.barbeiroCadastro3Controller">
+    <children>
+        <VBox alignment="CENTER" spacing="10.0">
+                <StackPane styleClass="logo">
+                    <ImageView fx:id="imageViewCliente" fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                        <image><Image url="@genBarber-Photoroom.png" /></image>
+                    </ImageView>
+                </StackPane>
+            </VBox>
+         
+        <Label text="Quase lá! Agora, insira o nome do seu salão e pequena descrição."/>
+
+        <Label text="Nome do Salão"/>
+        <TextField styleClass="inputTextFile" fx:id="nomeSalaoField" promptText="Nome do Salão" />
+        <Label text="Descrição do Salão"/>
+        <TextField styleClass="inputTextFile-1" fx:id="descricaoField" promptText="Descrição do Salão" />
+
+        <Button styleClass="buttonContinue" fx:id="registerBarbeiro" text="Continue" onAction="#cadastroBarbeiro4" />
+
+        <Button styleClass="buttonContinue" fx:id="registerBarbeiro" text="Voltar" onAction="#cadastroBarbeiro2" />
+
+    </children>
+</VBox>

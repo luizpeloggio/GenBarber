@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.RadioButton?>  
+<?import javafx.scene.control.ToggleGroup?> 
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.meuapp.barbeiroCadastro4Controller">
+    <children>
+        <VBox alignment="CENTER" spacing="10.0">
+                <StackPane styleClass="logo">
+                    <ImageView fx:id="imageViewCliente" fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                        <image><Image url="@genBarber-Photoroom.png" /></image>
+                    </ImageView>
+                </StackPane>
+            </VBox>
+         
+        <VBox spacing="5.0" alignment="CENTER">
+            <Label text="Escolha um método de contato"/> 
+            
+            <HBox alignment="CENTER" spacing="20.0">
+                
+                <fx:define>
+                    <ToggleGroup fx:id="tipoContatoGroup" />
+                </fx:define>
+
+                <RadioButton text="SMS" fx:id="rbBarbearia" toggleGroup="$tipoContatoGroup" selected="true" />
+                
+                <RadioButton text="Email" fx:id="rbSalao" toggleGroup="$tipoContatoGroup" />
+                
+                <RadioButton text="Telefone" fx:id="rbSalao" toggleGroup="$tipoContatoGroup" />
+
+            </HBox>
+        </VBox>
+
+                <Button styleClass="buttonContinue" text="Continuar" onAction="#telaPrincipalBarbeiro1" />
+                <Button styleClass="buttonContinue" fx:id="registerBarbeiro" text="Voltar" onAction="#cadastroBarbeiro3" />
+
+
+        </children>
+</VBox>

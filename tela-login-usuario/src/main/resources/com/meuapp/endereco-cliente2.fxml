@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<VBox alignment="TOP_CENTER" spacing="0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.meuapp.enderecoCliente2">
+    
+    <!-- CABEÇALHO -->
+    <VBox alignment="CENTER" style="-fx-background-color: #f2f2f2; -fx-padding: 25 0 20 0;">
+        <Label text="Cadastrar Endereço" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: black;"/>
+        <Label text="Preencha os dados do novo endereço" style="-fx-font-size: 14px; -fx-text-fill: #000000; -fx-padding: 5 0 0 0;"/>
+    </VBox>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <VBox style="-fx-background-color: #f8f9fa; -fx-padding: 15 15;" spacing="25" VBox.vgrow="ALWAYS" alignment="TOP_CENTER">
+        
+        <!-- FORMULÁRIO -->
+        <VBox spacing="20" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 10; -fx-border-color: #ecf0f1; -fx-border-width: 1; -fx-border-radius: 10;" maxWidth="500">
+            
+            <!-- APELIDO -->
+            <VBox spacing="5">
+                <Label text="Apelido do Endereço *" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <TextField fx:id="fieldApelido" promptText="Ex: Casa, Trabalho, etc." style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 5; -fx-border-radius: 5;"/>
+                <Label text="Como você gostaria de identificar este endereço" style="-fx-font-size: 11px; -fx-text-fill: #7f8c8d;"/>
+            </VBox>
+
+            <!-- CEP -->
+            <VBox spacing="5">
+                <Label text="CEP *" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <TextField fx:id="fieldCep" promptText="00000-000" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 5; -fx-border-radius: 5; -fx-pref-width: 150;"/>
+                    <Button text="Buscar CEP" onAction="#buscarCep" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 8 15; -fx-background-radius: 5;"/>
+                </HBox>
+            </VBox>
+
+            <!-- LOGRADOURO -->
+            <VBox spacing="5">
+                <Label text="Logradouro *" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <TextField fx:id="fieldLogradouro" promptText="Rua, Avenida, etc." style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 5; -fx-border-radius: 5;"/>
+            </VBox>
+
+            <!-- NÚMERO E COMPLEMENTO -->
+            <HBox spacing="15">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="Número *" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                    <TextField fx:id="fieldNumero" promptText="Nº" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 5; -fx-border-radius: 5;"/>
+                </VBox>
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="Complemento" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                    <TextField fx:id="fieldComplemento" promptText="Apto, Bloco, etc." style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 5; -fx-border-radius: 5;"/>
+                </VBox>
+            </HBox>
+
+            <!-- BAIRRO -->
+            <VBox spacing="5">
+                <Label text="Bairro *" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <TextField fx:id="fieldBairro" promptText="Nome do bairro" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 5; -fx-border-radius: 5;"/>
+            </VBox>
+
+            <!-- CIDADE E ESTADO -->
+            <HBox spacing="15">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="Cidade *" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                    <TextField fx:id="fieldCidade" promptText="Nome da cidade" style="-fx-font-size: 14px; -fx-padding: 5; -fx-background-radius: 5; -fx-border-radius: 5;"/>
+                </VBox>
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="Estado *" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                    <ComboBox fx:id="comboEstado" promptText="Selecione" style="-fx-font-size: 14px; -fx-background-radius: 5; -fx-border-radius: 5;"/>
+                </VBox>
+            </HBox>
+
+            <!-- CHECKBOX ENDEREÇO PRINCIPAL -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Definir como endereço principal" style="-fx-font-size: 14px; -fx-text-fill: #2c3e50;"/>
+                <Button fx:id="checkPrincipal" text="✓" onAction="#toggleEnderecoPrincipal" style="-fx-background-color: #ecf0f1; -fx-text-fill: #7f8c8d; -fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 5 8; -fx-background-radius: 3; -fx-border-radius: 3; -fx-cursor: hand;"/>
+            </HBox>
+
+            <!-- BOTÕES -->
+            <HBox spacing="5" alignment="CENTER">
+                <Button text="Cancelar" onAction="#cancelar" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 12 25; -fx-background-radius: 25;"/>
+                <Button text="Salvar" onAction="#salvarEndereco" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 12 25; -fx-background-radius: 25;"/>
+            </HBox>
+        </VBox>
+    </VBox>
+
+    <!-- MENU INFERIOR -->
+    <HBox spacing="0" alignment="CENTER" style="-fx-background-color: #f2f2f2; -fx-padding: 10 0;">
+        
+        <!-- BOTÃO INÍCIO -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#voltarPrincipalCliente">
+            <ImageView fitHeight="24" fitWidth="24" preserveRatio="true" pickOnBounds="true">
+                <image>
+                    <Image url="@casa.png" />
+                </image>
+            </ImageView>
+            <Label text="Início" style="-fx-font-size: 10px; -fx-text-fill: #ecf0f1;"/>
+        </VBox>
+
+        <!-- BOTÃO MENU -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#abrirMenuCliente">
+            <ImageView fitHeight="24" fitWidth="24" preserveRatio="true" pickOnBounds="true">
+                <image>
+                    <Image url="@menu.png" />
+                </image>
+            </ImageView>
+            <Label text="Menu" style="-fx-font-size: 10px; -fx-text-fill: #ecf0f1;"/>
+        </VBox>
+
+        <!-- BOTÃO COMPRAS -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#abrirComprasCliente">
+            <ImageView fitHeight="24" fitWidth="24" preserveRatio="true" pickOnBounds="true">
+                <image>
+                    <Image url="@carrinho-de-compras.png" />
+                </image>
+            </ImageView>
+            <Label text="Compras" style="-fx-font-size: 10px; -fx-text-fill: #ecf0f1;"/>
+        </VBox>
+
+        <!-- BOTÃO PERFIL -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand; -fx-background-color: #2c3e50; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 8 25;" onMouseClicked="#abrirPerfilCliente">
+            <ImageView fitHeight="22" fitWidth="22" preserveRatio="true" pickOnBounds="true">
+                <image>
+                    <Image url="@perfil.png" />
+                </image>
+            </ImageView>
+            <Label text="Perfil" style="-fx-font-size: 10px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- BOTÃO CONFIGURAÇÃO -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#abrirConfiguracaoCliente">
+            <ImageView fitHeight="24" fitWidth="24" preserveRatio="true" pickOnBounds="true">
+                <image>
+                    <Image url="@configuracao.png" />
+                </image>
+            </ImageView>
+            <Label text="Config" style="-fx-font-size: 10px; -fx-text-fill: #ecf0f1;"/>
+        </VBox>
+    </HBox>
+</VBox>

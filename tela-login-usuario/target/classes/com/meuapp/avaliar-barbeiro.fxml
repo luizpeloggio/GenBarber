@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<VBox alignment="TOP_CENTER" spacing="20"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.meuapp.avaliarBarbeiro"
+      style="-fx-background-color: #FFFFFF;">
+
+    <!-- PADDING CORRIGIDO -->
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <children>
+
+        <Label text="Avalie o Barbeiro"
+               style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+
+        <HBox alignment="CENTER" spacing="10">
+            <children>
+
+                <ImageView fx:id="estrela1" fitHeight="40" fitWidth="40">
+                    <image>
+                        <Image url="@images/estrela-vazia.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="estrela2" fitHeight="40" fitWidth="40">
+                    <image>
+                        <Image url="@images/estrela-vazia.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="estrela3" fitHeight="40" fitWidth="40">
+                    <image>
+                        <Image url="@images/estrela-vazia.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="estrela4" fitHeight="40" fitWidth="40">
+                    <image>
+                        <Image url="@images/estrela-vazia.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="estrela5" fitHeight="40" fitWidth="40">
+                    <image>
+                        <Image url="@images/estrela-vazia.png"/>
+                    </image>
+                </ImageView>
+
+            </children>
+        </HBox>
+
+        <TextArea fx:id="comentariosTextArea"
+                  promptText="Deixe aqui um comentário sobre o atendimento..."
+                  prefWidth="350" prefHeight="150"
+                  wrapText="true"
+                  style="-fx-font-size: 14px;" />
+
+        <Button fx:id="btnEnviar"
+                text="Enviar"
+                style="-fx-background-color: #0066CC; -fx-text-fill: white; -fx-font-size: 18px; -fx-padding: 10 20 10 20; -fx-background-radius: 8;" />
+
+    </children>
+</VBox>
+

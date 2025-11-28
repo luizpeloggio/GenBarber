@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.input.MouseEvent?>
+
+<VBox alignment="TOP_CENTER" spacing="0" xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.meuapp.menuCliente">
+
+    <!-- CABEÇALHO -->
+    <VBox alignment="CENTER" style="-fx-background-color: #f2f2f2; -fx-padding: 25 0 20 0;">
+        <Label text="Menu Principal" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: black;"/>
+        <Label text="Escolha uma opção" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d; -fx-padding: 5 0 0 0;"/>
+    </VBox>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <VBox style="-fx-background-color: #f8f9fa; -fx-padding: 30 20;" spacing="30" VBox.vgrow="ALWAYS">
+
+        <!-- PRIMEIRA LINHA DE OPÇÕES -->
+        <HBox alignment="CENTER" spacing="40">
+
+            <!-- HISTÓRICO -->
+            <VBox alignment="CENTER" spacing="12" style="-fx-cursor: hand;" onMouseClicked="#abrirHistoricoCliente">
+                <StackPane>
+                    <Circle radius="45" fill="linear-gradient(to bottom right, #3498db, #2980b9)">
+                        <effect>
+                            <DropShadow radius="8" color="rgba(0,0,0,0.3)"/>
+                        </effect>
+                    </Circle>
+                    <ImageView fitWidth="60" fitHeight="60" preserveRatio="false">
+                        <clip>
+                            <Circle radius="30" centerX="30" centerY="30"/>
+                        </clip>
+                        <image>
+                            <Image url="@historico.jpg"/>
+                        </image>
+                    </ImageView>
+                </StackPane>
+                <Label text="Histórico" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <Label text="Ver seus agendamentos" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;"/>
+            </VBox>
+
+            <!-- FAVORITOS -->
+            <VBox alignment="CENTER" spacing="12" style="-fx-cursor: hand;" onMouseClicked="#abrirFavoritosCliente">
+                <StackPane>
+                    <Circle radius="45" fill="linear-gradient(to bottom right, #e74c3c, #c0392b)">
+                        <effect>
+                            <DropShadow radius="8" color="rgba(0,0,0,0.3)"/>
+                        </effect>
+                    </Circle>
+                    <ImageView fitWidth="60" fitHeight="60" preserveRatio="false">
+                        <clip>
+                            <Circle radius="30" centerX="30" centerY="30"/>
+                        </clip>
+                        <image>
+                            <Image url="@favoritos.jpg"/>
+                        </image>
+                    </ImageView>
+                </StackPane>
+                <Label text="Favoritos" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <Label text="Barbearias favoritas" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;"/>
+            </VBox>
+
+        </HBox>
+
+        <!-- SEGUNDA LINHA DE OPÇÕES -->
+        <HBox alignment="CENTER" spacing="40">
+
+            <!-- LOCALIZAÇÃO -->
+            <VBox alignment="CENTER" spacing="12" style="-fx-cursor: hand;" onMouseClicked="#abrirEnderecoCliente">
+                <StackPane>
+                    <Circle radius="45" fill="linear-gradient(to bottom right, #27ae60, #229954)">
+                        <effect>
+                            <DropShadow radius="8" color="rgba(0,0,0,0.3)"/>
+                        </effect>
+                    </Circle>
+                    <ImageView fitWidth="60" fitHeight="60" preserveRatio="false">
+                        <clip>
+                            <Circle radius="30" centerX="30" centerY="30"/>
+                        </clip>
+                        <image>
+                            <Image url="@bussola.jpg"/>
+                        </image>
+                    </ImageView>
+                </StackPane>
+                <Label text="Localização" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <Label text="Encontrar barbearias" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;"/>
+            </VBox>
+
+            <!-- AGENDAMENTO -->
+            <VBox alignment="CENTER" spacing="12" style="-fx-cursor: hand;" onMouseClicked="#abrirAgendamentoCliente">
+                <StackPane>
+                    <Circle radius="45" fill="linear-gradient(to bottom right, #f39c12, #e67e22)">
+                        <effect>
+                            <DropShadow radius="8" color="rgba(0,0,0,0.3)"/>
+                        </effect>
+                    </Circle>
+                    <ImageView fitWidth="60" fitHeight="60" preserveRatio="false">
+                        <clip>
+                            <Circle radius="30" centerX="30" centerY="30"/>
+                        </clip>
+                        <image>
+                            <Image url="@agendament0.jpg"/>
+                        </image>
+                    </ImageView>
+                </StackPane>
+                <Label text="Agendamento" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <Label text="Novo agendamento" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;"/>
+            </VBox>
+
+        </HBox>
+
+    </VBox> <!-- FECHA CONTEÚDO PRINCIPAL -->
+
+    <!-- MENU INFERIOR -->
+    <HBox spacing="0" alignment="CENTER" style="-fx-background-color: #f2f2f2; -fx-padding: 15 0;">
+
+        <!-- BOTÃO INÍCIO -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#voltarPrincipalCliente">
+            <ImageView fitWidth="24" fitHeight="24" preserveRatio="true">
+                <image><Image url="@casa.png"/></image>
+            </ImageView>
+            <Label text="Início" style="-fx-font-size: 10px; -fx-text-fill: #ecf0f1;"/>
+        </VBox>
+
+        <!-- BOTÃO MENU -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#abrirMenuCliente">
+            <ImageView fitWidth="22" fitHeight="22" preserveRatio="true">
+                <image><Image url="@menu.png"/></image>
+            </ImageView>
+            <Label text="Menu" style="-fx-font-size: 10px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- BOTÃO COMPRAS -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#abrirComprasCliente">
+            <ImageView fitWidth="24" fitHeight="24" preserveRatio="true">
+                <image><Image url="@carrinho-de-compras.png"/></image>
+            </ImageView>
+            <Label text="Compras" style="-fx-font-size: 10px; -fx-text-fill: #ecf0f1;"/>
+        </VBox>
+
+        <!-- BOTÃO PERFIL -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#abrirPerfilCliente">
+            <ImageView fitWidth="24" fitHeight="24" preserveRatio="true">
+                <image><Image url="@perfil.png"/></image>
+            </ImageView>
+            <Label text="Perfil" style="-fx-font-size: 10px; -fx-text-fill: #ecf0f1;"/>
+        </VBox>
+
+        <!-- BOTÃO CONFIGURAÇÃO -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#abrirConfiguracaoCliente">
+            <ImageView fitWidth="24" fitHeight="24" preserveRatio="true">
+                <image><Image url="@configuracao.png"/></image>
+            </ImageView>
+            <Label text="Config" style="-fx-font-size: 10px; -fx-text-fill: #ecf0f1;"/>
+        </VBox>
+
+    </HBox>
+</VBox>

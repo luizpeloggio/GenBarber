@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+
+<VBox alignment="TOP_CENTER" spacing="0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.meuapp.enderecoCliente">
+    
+    <!-- CABEÇALHO -->
+    <VBox alignment="CENTER" style="-fx-background-color: #f2f2f2; -fx-padding: 25 0 20 0;">
+        <Label text="Meus Endereços" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: black;"/>
+        <Label text="Gerencie seus endereços de atendimento" style="-fx-font-size: 14px; -fx-text-fill: #ecf0f1; -fx-padding: 5 0 0 0;"/>
+    </VBox>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <VBox style="-fx-background-color: #f8f9fa; -fx-padding: 20;" spacing="20" VBox.vgrow="ALWAYS">
+        
+        <!-- BOTÃO ADICIONAR NOVO ENDEREÇO -->
+        <HBox alignment="CENTER">
+            <Button text="+" onAction="#adicionarNovoEndereco" 
+                    style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 12 25; -fx-background-radius: 25;"/>
+        </HBox>
+
+        <!-- ÁREA DE ENDEREÇOS CADASTRADOS -->
+        <VBox spacing="15" VBox.vgrow="ALWAYS">
+            <Label text="Endereços Cadastrados" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            
+            <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                <VBox fx:id="containerEnderecos" spacing="12" alignment="TOP_CENTER">
+                    <!-- Os endereços serão adicionados dinamicamente aqui -->
+                    
+                    <!-- Mensagem quando não há endereços -->
+                    <VBox fx:id="containerSemEnderecos" alignment="CENTER" spacing="15" style="-fx-padding: 40;">
+                        <ImageView fitHeight="80" fitWidth="80" preserveRatio="true" pickOnBounds="true">
+                            <image>
+                                <Image url="@localizacao-vazia.png" />
+                            </image>
+                        </ImageView>
+                        <Label text="Nenhum endereço cadastrado" style="-fx-font-size: 16px; -fx-text-fill: #7f8c8d;"/>
+                        <Label text="Clique em 'Adicionar Novo Endereço' para cadastrar seu primeiro endereço" 
+                               style="-fx-font-size: 12px; -fx-text-fill: #bdc3c7; -fx-wrap-text: true; -fx-text-alignment: center;"/>
+                    </VBox>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </VBox>
+
+    <!-- MENU INFERIOR -->
+    <HBox spacing="0" alignment="CENTER" style="-fx-background-color: #f2f2f2; -fx-padding: 15 0;">
+        
+        <!-- BOTÃO INÍCIO -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#voltarPrincipalCliente">
+            <ImageView fitHeight="24" fitWidth="24" preserveRatio="true" pickOnBounds="true">
+                <image>
+                    <Image url="@casa.png" />
+                </image>
+            </ImageView>
+            <Label text="Início" style="-fx-font-size: 10px; -fx-text-fill: #ecf0f1;"/>
+        </VBox>
+
+        <!-- BOTÃO MENU -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#abrirMenuCliente">
+            <ImageView fitHeight="24" fitWidth="24" preserveRatio="true" pickOnBounds="true">
+                <image>
+                    <Image url="@menu.png" />
+                </image>
+            </ImageView>
+            <Label text="Menu" style="-fx-font-size: 10px; -fx-text-fill: #ecf0f1;"/>
+        </VBox>
+
+        <!-- BOTÃO COMPRAS -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#abrirComprasCliente">
+            <ImageView fitHeight="24" fitWidth="24" preserveRatio="true" pickOnBounds="true">
+                <image>
+                    <Image url="@carrinho-de-compras.png" />
+                </image>
+            </ImageView>
+            <Label text="Compras" style="-fx-font-size: 10px; -fx-text-fill: #ecf0f1;"/>
+        </VBox>
+
+        <!-- BOTÃO PERFIL -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#abrirPerfilCliente">
+            <ImageView fitHeight="22" fitWidth="22" preserveRatio="true" pickOnBounds="true">
+                <image>
+                    <Image url="@perfil.png" />
+                </image>
+            </ImageView>
+            <Label text="Perfil" style="-fx-font-size: 10px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- BOTÃO CONFIGURAÇÃO -->
+        <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 25; -fx-cursor: hand;" onMouseClicked="#abrirConfiguracaoCliente">
+            <ImageView fitHeight="24" fitWidth="24" preserveRatio="true" pickOnBounds="true">
+                <image>
+                    <Image url="@configuracao.png" />
+                </image>
+            </ImageView>
+            <Label text="Config" style="-fx-font-size: 10px; -fx-text-fill: #ecf0f1;"/>
+        </VBox>
+    </HBox>
+</VBox>

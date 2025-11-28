@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Region?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.meuapp.telaPrincipalBarbeiro"
+      alignment="TOP_CENTER"
+      spacing="20"
+      style="-fx-padding: 20;">
+
+    <!-- LOGO -->
+    <VBox alignment="CENTER">
+        <StackPane alignment="CENTER">
+            <ImageView fx:id="imageViewCliente"
+                       fitHeight="130" fitWidth="130"
+                       preserveRatio="true">
+                <Image url="@genBarber-Photoroom.png" />
+            </ImageView>
+        </StackPane>
+    </VBox>
+
+    <!-- TÍTULO -->
+    <Label text="Gerenciamento de Atividades"
+           style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+
+    <!-- área que cresce e empurra o menu para baixo -->
+    <VBox alignment="CENTER" spacing="25" VBox.vgrow="ALWAYS">
+
+        <HBox spacing="40" alignment="CENTER">
+
+            <!-- Item 1 -->
+            <VBox spacing="10" alignment="CENTER">
+                <ImageView fitHeight="140" fitWidth="140" preserveRatio="false">
+                    <image><Image url="@agendamentoBarbeiro.jpg" /></image>
+                </ImageView>
+                <Label text="Agendamentos" style="-fx-font-size: 15px;" />
+                <Button text="Ver agendamentos" styleClass="button" onAction="#irAgendamento" />
+            </VBox>
+
+            <!-- Item 2 -->
+            <VBox spacing="10" alignment="CENTER">
+                <ImageView fitHeight="140" fitWidth="140" preserveRatio="false">
+                    <image><Image url="@bonusBarbeiro.png" /></image>
+                </ImageView>
+                <Label text="Bônus" style="-fx-font-size: 15px;" />
+                <Button text="Ver bônus" styleClass="button" onAction="#irBonus" />
+            </VBox>
+
+            <!-- Item 3 -->
+            <VBox spacing="10" alignment="CENTER">
+                <ImageView fitHeight="140" fitWidth="140" preserveRatio="false">
+                    <image><Image url="@rendimentosBarbeiro.png" /></image>
+                </ImageView>
+                <Label text="Rendimentos" style="-fx-font-size: 15px;" />
+                <Button text="Ver rendimentos" styleClass="button" onAction="#irRendimentos" />
+            </VBox>
+
+        </HBox>
+    </VBox>
+
+    <!-- MENU INFERIOR FIXO -->
+    <HBox spacing="60"
+          alignment="CENTER"
+          style="-fx-padding: 12 0 5 0;">
+
+        <ImageView fx:id="casa1" fitHeight="28" fitWidth="28"
+                   preserveRatio="true" onMouseClicked="#irTelaPrincipalBarbeiro">
+            <image><Image url="@casa.png"/></image>
+        </ImageView>
+
+        <ImageView fx:id="perfil1" fitHeight="28" fitWidth="28"
+                   preserveRatio="true" onMouseClicked="#irPerfilBarbeiro">
+            <image><Image url="@perfil.png" /></image>
+        </ImageView>
+
+        <ImageView fx:id="avaliacao1" fitHeight="28" fitWidth="28"
+                   preserveRatio="true" onMouseClicked="#abrirAvaliacoes">
+            <image><Image url="@avaliacao.png" /></image>
+        </ImageView>
+
+        <ImageView fx:id="configuracao1" fitHeight="28" fitWidth="28"
+                   preserveRatio="true" onMouseClicked="#irConfiguracaoBarbeiro">
+            <image><Image url="@configuracao.png" /></image>
+        </ImageView>
+
+    </HBox>
+
+</VBox>
