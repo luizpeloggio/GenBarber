@@ -33,8 +33,8 @@ public class areaAgendamento {
 
             // ≡ Texto do agendamento
             Label lbl = new Label(
-                    "Cliente: " + a.getCliente() +
-                            "\nServiço(s): " + a.getServico() +
+                    "Cliente: " + a.getCPF() +
+                            "\nServiço(s): " + a.getTipo_Servico() +
                             "\nValor: R$ " + String.format("%.2f", a.getValor()));
 
             lbl.setStyle("-fx-font-size: 14px;");
@@ -63,14 +63,14 @@ public class areaAgendamento {
 
     // ✔ Ao aceitar um pedido
     private void aceitarAgendamento(Agendamento a) {
-        System.out.println("Agendamento aceito: " + a.getServico());
+        System.out.println("Agendamento aceito: " + a.getTipo_Servico());
         Agendamentos.getLista().remove(a);
         initialize(); // atualiza tela
     }
 
     // ✔ Ao negar um pedido
     private void negarAgendamento(Agendamento a) {
-        System.out.println("Agendamento negado: " + a.getServico());
+        System.out.println("Agendamento negado: " + a.getTipo_Servico());
         Agendamentos.getLista().remove(a);
         initialize(); // atualiza tela
     }
