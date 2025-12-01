@@ -10,8 +10,8 @@ public class Agendamento {
 	private String Tipo_Pagamento;
 	private String CNPJ;
 	private int ID_Promocao;
-	private String Tipo_Servico; // Tipo (do Serviço)
-	private float Valor; //Valor (do Serviço/Agendamento)
+	private String Tipo_Servico;
+	private double Valor;
 	private String CPF;
 	
 	//Construtor Default
@@ -60,10 +60,10 @@ public class Agendamento {
 	public String getTipo_Servico() {
 		return Tipo_Servico;
 	}
-	public void setValor(float Valor) {
+	public void setValor(double Valor) {
 		this.Valor = Valor;
 	}
-	public float getValor() {
+	public double getValor() {
 		return Valor;
 	}
 	public void setCPF(String CPF) {

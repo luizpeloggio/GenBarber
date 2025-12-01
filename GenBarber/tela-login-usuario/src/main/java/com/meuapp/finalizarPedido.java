@@ -94,7 +94,7 @@ public class finalizarPedido implements Initializable {
 
 		// Dados do Serviço
 		novoAgendamento.setTipo_Servico(servicos.toString());
-		novoAgendamento.setValor((float) total);
+		novoAgendamento.setValor(total);
 
 		// 3. Persistência (Chama o DAO - CRUD CREATE)
 		AgendamentoDAO dao = new AgendamentoDAO();

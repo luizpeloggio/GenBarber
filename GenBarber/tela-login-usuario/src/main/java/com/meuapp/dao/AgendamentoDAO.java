@@ -8,10 +8,10 @@ import java.util.List;
 
 public class AgendamentoDAO {
 	// SQLs Corrigidas para 9 campos na tabela Agendamento (incluindo Tipo e Valor)
-	private static final String INSERT_AGENDAMENTO_SQL = "INSERT INTO Agendamento (Cod_Agendamento, Data_, Horario, Tipo_Pagamento, CNPJ, ID_Promocao, CPF, Tipo, Valor) "
+	private static final String INSERT_AGENDAMENTO_SQL = "INSERT INTO Agendamento (Cod_Agendamento, Data_, Horario, Tipo_Pagamento, CNPJ, ID_Promocao, Tipo_Servico, Valor,CPF) "
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-	private static final String UPDATE_AGENDAMENTO_SQL = "UPDATE Agendamento SET Data_ = ?, Horario = ?, Tipo_Pagamento = ?, ID_Promocao = ?, Tipo = ?, Valor = ? WHERE Cod_Agendamento = ?";
+	private static final String UPDATE_AGENDAMENTO_SQL = "UPDATE Agendamento SET Data_ = ?, Horario = ?, Tipo_Pagamento = ?, ID_Promocao = ?, Tipo_Servico = ?, Valor = ? WHERE Cod_Agendamento = ?";
 
 	private static final String DELETE_AGENDAMENTO_SQL = "DELETE FROM Agendamento WHERE Cod_Agendamento = ?";
 
@@ -38,7 +38,7 @@ public class AgendamentoDAO {
 
 			stmt.setString(7, agendamento.getCPF()); // 7. CPF
 			stmt.setString(8, agendamento.getTipo_Servico()); // 8. Tipo (Serviço)
-			stmt.setFloat(9, agendamento.getValor()); // 9. Valor
+			stmt.setDouble(9, agendamento.getValor()); // 9. Valor
 
 			return stmt.executeUpdate() > 0;
 		} catch (SQLException e) {
@@ -84,7 +84,7 @@ public class AgendamentoDAO {
 				agendamento.setID_Promocao(rs.getInt("ID_Promocao"));
 				agendamento.setCPF(rs.getString("CPF"));
 				agendamento.setTipo_Servico(rs.getString("Tipo")); // Novo campo
-				agendamento.setValor(rs.getFloat("Valor")); // Novo campo
+				agendamento.setValor(rs.getDouble("Valor")); // Novo campo
 
 				agendamentos.add(agendamento);
 			}
@@ -125,7 +125,7 @@ public class AgendamentoDAO {
 			}
 
 			stmt.setString(5, agendamento.getTipo_Servico());
-			stmt.setFloat(6, agendamento.getValor());
+			stmt.setDouble(6, agendamento.getValor());
 
 			// 2. WHERE (PK)
 			stmt.setInt(7, agendamento.getCod_Agendamento());
