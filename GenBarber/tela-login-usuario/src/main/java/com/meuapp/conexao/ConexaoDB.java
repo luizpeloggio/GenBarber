@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConexaoDB {
 	// Constantes de conexao com o banco de dados
-	private static final String url = "jdbc:mysql://localhost:3306/GenBarber_Banco?useTimezone=true&serverTimezone=UTC";
+	private static final String url = "jdbc:mysql://localhost:3306/GenBarber_Banco";
 	private static final String usuario = "root";
 	private static final String senha = "BAV99Je3Z.RAefP";
 
