@@ -7,132 +7,137 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ClienteDao {
-	// Create - C
-	/**
-	 * Insere um novo cliente no banco de dados
-	 * 
-	 * @param cliente O objeto cliente a ser salvo
-	 * @return true se a insercao for bem sucedida, false se nao for bem sucedida
-	 */
-	public boolean inserir(com.meuapp.model.Cliente cliente) {
-		String sql = "INSERT INTO Cliente (CPF, Nome, Email, Telefone) VALUES(?, ?, ?, ?)";
+	public boolean inserir(Cliente cliente) {
+		//SQL para a tabela USUARIO
+		String sqlUsuario = "INSERT INTO Usuario (CPF, Nome, Email, Telefone) VALUES (?, ?, ?, ?)";
+		//SQL para a tabela CLIENTE
+		String sqlCliente = "INSERT INTO Cliente (CPF) VALUES (?)";
 
 		Connection conexao = null;
-		PreparedStatement stmt = null;
+		PreparedStatement stmtUsuario = null;
+		PreparedStatement stmtCliente = null;
 
 		try {
-			// Abrir a conexao com o banco de dados
 			conexao = ConexaoDB.conectar();
-			// Preparando o statement
-			stmt = conexao.prepareStatement(sql);
-			// Setando os valores nos espaços reservados (?)
-			stmt.setString(1, cliente.getCpf()); // Primeiro '?' é o CPF
-			stmt.setString(2, cliente.getNome()); // Segundo '?' é o nome
-			stmt.setString(3, cliente.getEmail()); // Terceiro '?' é o email
-			stmt.setString(4, cliente.getTelefone()); // Quarto '?' é o telefone
+			conexao.setAutoCommit(false);
 
-			// Executar o comando
-			int num_linhasAfetadas = stmt.executeUpdate();
+			// Passo A: Inserir em Usuario
+			stmtUsuario = conexao.prepareStatement(sqlUsuario);
+			stmtUsuario.setString(1, cliente.getCpf());
+			stmtUsuario.setString(2, cliente.getNome());
+			stmtUsuario.setString(3, cliente.getEmail());
+			stmtUsuario.setString(4, String.valueOf(cliente.getTelefone()));
+			stmtUsuario.executeUpdate();
 
-			// Se pelo menos uma linha tiver sido inserida, o método retorna true
-			return num_linhasAfetadas > 0;
+			// Passo B: Inserir em Cliente
+			stmtCliente = conexao.prepareStatement(sqlCliente);
+			stmtCliente.setString(1, cliente.getCpf());
+			stmtCliente.executeUpdate();
+
+			conexao.commit();
+			return true;
+
 		} catch (SQLException e) {
-			System.err.println("Erro ao inserir o novo cliente: " + e.getMessage());
+			System.err.println("Erro ao inserir cliente: " + e.getMessage());
+			try {
+				if (conexao != null)
+					conexao.rollback();
+			} catch (SQLException ex) {
+				System.err.println("Erro ao desfazer transação: " + ex.getMessage());
+			}
 			e.printStackTrace();
 			return false;
 		} finally {
-			// Finalizar o statemente e a conexao com o banco de dados
-			// Se ocorrer o erro eles serão fechados
 			try {
-				if (stmt != null) {
-					stmt.close();
-				}
+				if (stmtUsuario != null)
+					stmtUsuario.close();
+				if (stmtCliente != null)
+					stmtCliente.close();
 				ConexaoDB.fecharConexao(conexao);
 			} catch (SQLException e) {
-				System.err.println("Erro ao fechar os recursos: " + e.getMessage());
+				System.err.println("Erro ao fechar recursos: " + e.getMessage());
 			}
 		}
 	}
 
-	// Update - U
-	/**
-	 * Atualiza um cliente existente no banco de dados, utilizando o CPF como chave.
-	 * 
-	 * @param cliente O objeto Cliente com os dados atualizados.
-	 * @return true se a atualização for bem-sucedida.
-	 */
-	public boolean atualizar(com.meuapp.model.Cliente cliente) {
-		// SQL de UPDATE: CPF é a chave, os demais campos são alterados
-		String sql = "UPDATE Cliente SET Nome = ?, Email = ?, Telefone = ? WHERE cpf = ?";
+	public boolean atualizar(Cliente cliente) {
+		String sql = "UPDATE Usuario SET Nome = ?, Email = ?, Telefone = ? WHERE CPF = ?";
 
 		Connection conexao = null;
 		PreparedStatement stmt = null;
 
 		try {
-			conexao = com.meuapp.conexao.ConexaoDB.conectar();
+			conexao = ConexaoDB.conectar();
 			stmt = conexao.prepareStatement(sql);
 
-			//Setar os novos valores (Nome, Email, Telefone)
 			stmt.setString(1, cliente.getNome());
 			stmt.setString(2, cliente.getEmail());
-			stmt.setString(3, cliente.getTelefone());
-
-			//Setar o valor do WHERE (CPF) - Chave primaria
+			stmt.setString(3, String.valueOf(cliente.getTelefone()));
 			stmt.setString(4, cliente.getCpf());
 
-			int linhasAfetadas = stmt.executeUpdate();
-			return linhasAfetadas > 0;
+			return stmt.executeUpdate() > 0;
 
 		} catch (SQLException e) {
 			System.err.println("Erro ao atualizar cliente: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		} finally {
-			//Fechar recursos
 			try {
 				if (stmt != null)
 					stmt.close();
-				com.meuapp.conexao.ConexaoDB.fecharConexao(conexao);
+				ConexaoDB.fecharConexao(conexao);
 			} catch (SQLException e) {
 				System.err.println("Erro ao fechar recursos: " + e.getMessage());
 			}
 		}
 	}
-	/**
-     * Remove um cliente do banco de dados pelo CPF (Delete).
-     * @param cpf O CPF (chave primária) do cliente a ser removido.
-     * @return true se a remoção for bem-sucedida.
-     */
-    public boolean excluir(String cpf) {
-        // SQL de DELETE
-        String sql = "DELETE FROM Cliente WHERE cpf = ?"; 
-        
-        Connection conexao = null;
-        PreparedStatement stmt = null;
-        
-        try {
-            conexao = com.meuapp.conexao.ConexaoDB.conectar();
-            stmt = conexao.prepareStatement(sql);
-            
-            //Setar o valor do WHERE (CPF)
-            stmt.setString(1, cpf); 
 
-            int linhasAfetadas = stmt.executeUpdate();
-            return linhasAfetadas > 0;
-            
-        } catch (SQLException e) {
-            System.err.println("Erro ao excluir cliente: " + e.getMessage());
-            e.printStackTrace();
-            return false;
-        } finally {
-            //Fechar recursos
-            try {
-                if (stmt != null) 
-                	stmt.close();
-                com.meuapp.conexao.ConexaoDB.fecharConexao(conexao);
-            } catch (SQLException e) {
-                System.err.println("Erro ao fechar recursos: " + e.getMessage());
-            }
-        }
-    }
+	public boolean excluir(String cpf) {
+		String sqlCliente = "DELETE FROM Cliente WHERE CPF = ?";
+		String sqlUsuario = "DELETE FROM Usuario WHERE CPF = ?";
+
+		Connection conexao = null;
+		PreparedStatement stmtCliente = null;
+		PreparedStatement stmtUsuario = null;
+		boolean sucesso = false;
+
+		try {
+			conexao = ConexaoDB.conectar();
+			conexao.setAutoCommit(false);
+
+			stmtCliente = conexao.prepareStatement(sqlCliente);
+			stmtCliente.setString(1, cpf);
+			stmtCliente.executeUpdate();
+
+			stmtUsuario = conexao.prepareStatement(sqlUsuario);
+			stmtUsuario.setString(1, cpf);
+
+			if (stmtUsuario.executeUpdate() > 0) {
+				sucesso = true;
+			}
+
+			conexao.commit();
+			return sucesso;
+
+		} catch (SQLException e) {
+			System.err.println("Erro ao excluir cliente: " + e.getMessage());
+			try {
+				if (conexao != null)
+					conexao.rollback();
+			} catch (SQLException ex) {
+			}
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if (stmtCliente != null)
+					stmtCliente.close();
+				if (stmtUsuario != null)
+					stmtUsuario.close();
+				ConexaoDB.fecharConexao(conexao);
+			} catch (SQLException e) {
+				System.err.println("Erro ao fechar recursos: " + e.getMessage());
+			}
+		}
+	}
 }

@@ -1,4 +1,4 @@
-package com.meuapp.model;
+ package com.meuapp.model;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -10,6 +10,8 @@ public class Agendamento {
 	private String Tipo_Pagamento;
 	private String CNPJ;
 	private int ID_Promocao;
+	private String Tipo_Servico; // Tipo (do Serviço)
+	private float Valor; //Valor (do Serviço/Agendamento)
 	private String CPF;
 	
 	//Construtor Default
@@ -52,7 +54,22 @@ public class Agendamento {
 	public int getID_Promocao() {
 		return ID_Promocao;
 	}
+	public void setTipo_Servico(String Tipo_Servico) {
+		this.Tipo_Servico = Tipo_Servico;
+	}
+	public String getTipo_Servico() {
+		return Tipo_Servico;
+	}
+	public void setValor(float Valor) {
+		this.Valor = Valor;
+	}
+	public float getValor() {
+		return Valor;
+	}
 	public void setCPF(String CPF) {
 		this.CPF = CPF;
+	}
+	public String getCPF() {
+		return CPF;
 	}
 }
