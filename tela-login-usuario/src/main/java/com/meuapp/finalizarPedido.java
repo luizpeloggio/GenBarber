@@ -1,82 +1,123 @@
 package com.meuapp;
 
-import java.io.IOException;
-
+import dao.AgendamentoDAO;
 import com.meuapp.model.Agendamento;
-import com.meuapp.model.Agendamentos;
 import com.meuapp.model.Carrinho;
-import com.meuapp.model.Rendimentos;
 import com.meuapp.model.Servico;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.Date;
+import java.sql.Time;
+import java.util.Random;
+import java.util.ResourceBundle;
 
-public class finalizarPedido {
+public class finalizarPedido implements Initializable {
 
-    @FXML
-    private VBox listaCompras;
+	@FXML
+	private VBox listaCompras;
+	@FXML
+	private Label lblPagamento;
+	@FXML
+	private Label lblEndereco;
+	@FXML
+	private Label lblTotal;
 
-    @FXML
-    private Label lblPagamento;
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
 
-    @FXML
-    private Label lblEndereco;
+		listaCompras.getChildren().clear();
+		double total = 0;
 
-    @FXML
-    private Label lblTotal;
+		// 1. Carrega os itens do Carrinho (modelo em memória)
+		if (Carrinho.getItens().isEmpty()) {
+			// Pode adicionar uma mensagem de erro se o carrinho estiver vazio
+			listaCompras.getChildren().add(new Label("Carrinho vazio! Adicione serviços primeiro."));
+		} else {
+			// 2. Calcula o total e exibe os itens na listaCompras VBox
+			for (Servico s : Carrinho.getItens()) {
+				Label item = new Label(s.getNome() + " - R$ " + String.format("%.2f", s.getPreco()));
+				item.setStyle("-fx-font-size: 14px;");
+				listaCompras.getChildren().add(item);
+				total += s.getPreco();
+			}
+		}
 
-    @FXML
-    public void initialize() {
+		// 3. Atualiza os placeholders (que deveriam vir de outras telas)
+		lblTotal.setText("R$ " + String.format("%.2f", total));
+		lblPagamento.setText("Cartão de Crédito"); // Placeholder do Pagamento
+		lblEndereco.setText("Rua Exemplo, 123 - Centro"); // Placeholder do Endereço
+	}
 
-        listaCompras.getChildren().clear();
+	// Método de Ação (Chamado ao clicar no botão "Confirmar")
+	@FXML
+	private void ConfirmarPedido() throws IOException {
 
-        double total = 0;
+		// 1. Coleta e Preparação dos Dados do Carrinho
+		double total = 0;
+		StringBuilder servicos = new StringBuilder();
 
-        // Exibe os serviços adicionados ao carrinho
-        for (Servico s : Carrinho.getItens()) {
-            Label item = new Label(s.getNome() + " - R$ " + String.format("%.2f", s.getPreco()));
-            item.setStyle("-fx-font-size: 14px;");
-            listaCompras.getChildren().add(item);
+		for (Servico s : Carrinho.getItens()) {
+			total += s.getPreco();
+			servicos.append(s.getNome()).append(", ");
+		}
 
-            total += s.getPreco();
-        }
+		if (Carrinho.getItens().isEmpty()) {
+			exibirAlerta("Erro", "O carrinho está vazio. Adicione serviços antes de confirmar.");
+			return;
+		}
 
-        lblTotal.setText("R$ " + String.format("%.2f", total));
+		// Limpa a vírgula final
+		servicos.setLength(servicos.length() - 2);
 
-        // Placeholder (você pode substituir por dados reais no futuro)
-        lblPagamento.setText("Cartão de Crédito");
-        lblEndereco.setText("Rua Exemplo, 123 - Centro");
-    }
+		// 2. Mapeamento Objeto (Agendamento) - POO
+		Agendamento novoAgendamento = new Agendamento();
 
-    @FXML
-    private void ConfirmarPedido() throws IOException {
+		// ** ID de Agendamento ** (Gerando um ID único aleatório)
+		novoAgendamento.setCod_Agendamento(new Random().nextInt(1000000) + 1);
 
-        double total = 0;
-        int qtdServicos = Carrinho.getItens().size();
-        StringBuilder servicos = new StringBuilder();
+		// DADOS OBRIGATÓRIOS (Placeholders de teste)
+		novoAgendamento.setCPF("12345678911"); // CPF do cliente (TESTE)
+		novoAgendamento.setCNPJ("123421"); // CNPJ da Barbearia (TESTE)
 
-        for (Servico s : Carrinho.getItens()) {
-            total += s.getPreco();
-            servicos.append(s.getNome()).append(", ");
-        }
+		// Outros campos obrigatórios
+		novoAgendamento.setDate(new Date(System.currentTimeMillis())); // Data de hoje (usando java.sql.Date)
+		novoAgendamento.setHorario(new Time(System.currentTimeMillis())); // Hora atual (usando java.sql.Time)
+		novoAgendamento.setTipo_Pagamento(lblPagamento.getText()); // Pega o texto do Label
+		novoAgendamento.setID_Promocao(0); // Usa ID 0 para 'sem promoção'
 
-        if (servicos.length() > 2) {
-            servicos.setLength(servicos.length() - 2); // remove última vírgula
-        }
+		// Dados do Serviço
+		novoAgendamento.setTipo_Servico(servicos.toString());
+		novoAgendamento.setValor(total);
 
-        // 👉 Salva rendimentos e atendimentos
-        Rendimentos.adicionarRendimento(total);
-        Rendimentos.adicionarAtendimentos(qtdServicos);
+		// 3. Persistência (Chama o DAO - CRUD CREATE)
+		AgendamentoDAO dao = new AgendamentoDAO();
+		boolean sucesso = dao.inserir(novoAgendamento);
 
-        // 👉 Cria e registra o agendamento do cliente
-        Agendamento ag = new Agendamento("Luiz", servicos.toString(), total);
-        Agendamentos.adicionar(ag);
+		// 4. Feedback e Limpeza
+		if (sucesso) {
+			Carrinho.limpar(); // Limpa o carrinho
+			exibirAlerta("Sucesso", "Agendamento confirmado e salvo no banco de dados!");
 
-        // Limpa o carrinho
-        Carrinho.limpar();
+			// Redireciona para a próxima tela
+			App.setRoot("telaPrincipal-cliente");
+		} else {
+			exibirAlerta("Erro", "Falha ao registrar o agendamento no banco de dados. Verifique a conexão.");
+		}
+	}
 
-        // Redireciona para área do barbeiro (agenda dele)
-        App.setRoot("avaliar-cliente");
-    }
+	// Método auxiliar para exibir Alertas
+	private void exibirAlerta(String titulo, String mensagem) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(titulo);
+		alert.setHeaderText(null);
+		alert.setContentText(mensagem);
+		alert.showAndWait();
+	}
 }

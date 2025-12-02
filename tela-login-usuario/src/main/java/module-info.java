@@ -2,7 +2,8 @@ module com.meuapp {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
-
+    requires java.sql;
+    
     // Permite que o FXMLLoader acesse controladores dentro de com.meuapp
     opens com.meuapp to javafx.fxml;
 
@@ -13,4 +14,6 @@ module com.meuapp {
     // Exporta os pacotes para que as classes possam ser usadas
     exports com.meuapp;
     exports com.meuapp.model;
+    exports conexao;
+    exports dao;
 }
