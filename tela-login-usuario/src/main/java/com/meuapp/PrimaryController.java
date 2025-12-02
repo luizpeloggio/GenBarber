@@ -4,14 +4,14 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
+import dao.ClienteDao;
+import com.meuapp.model.Cliente;
 
 public class PrimaryController {
 
-    @FXML
-    private TextField emailField;
-
-    @FXML
-    private TextField passwordField;
+    @FXML private TextField emailField;
+    @FXML private PasswordField passwordField;
 
     // Tela de cadastro
     @FXML
@@ -26,22 +26,26 @@ public class PrimaryController {
         String email = emailField.getText();
         String senha = passwordField.getText();
 
-        // Login cliente
-        if (email.equals("luiz123@gmail.com") && senha.equals("1234567")) {
-            App.setRoot("telaPrincipal-cliente"); // coloque o nome correto da sua tela
-            return;
+        ClienteDao dao = new ClienteDao();
+        
+        //Solicita o banco de dados
+        Cliente clienteLogado = dao.autenticar(email, senha);
+        
+        if(clienteLogado != null) {
+        	//Sucesso
+        	
+        	//Salva na sessão
+        	Sessao.setClienteLogado(clienteLogado);
+        	
+        	//Muda de tela
+        	App.setRoot("telaPrincipal-cliente");
+        } else {
+        	//Erro
+        	Alert alert = new Alert(Alert.AlertType.ERROR);
+        	alert.setTitle("Login Inválido");
+        	alert.setHeaderText("Acesso Negado");
+        	alert.setContentText("Email ou senha incorretos");
+        	alert.showAndWait();
         }
-
-        // Login barbeiro
-        if (email.equals("luiz123@genbarber.com") && senha.equals("456")) {
-            App.setRoot("telaPrincipal-barbeiro"); // coloque o nome correto da sua tela
-            return;
-        }
-
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro de Login");
-        alert.setHeaderText("Credenciais incorretas");
-        alert.setContentText("O e-mail ou a senha que você digitou estão incorretos.");
-        alert.showAndWait();
     }
 }

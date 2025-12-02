@@ -9,7 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class terceiraTelaController {
-	// Mapeamento dos campos do FXML (fx:id)
+
 	@FXML
 	private TextField nameField;
 	@FXML
@@ -28,7 +28,7 @@ public class terceiraTelaController {
 	private void telaPrincipalCliente() throws IOException {
 		ClienteDao clienteDao = new ClienteDao();
 
-		// 1. Coleta e Validação (Lógica de Negócio)
+		//Coleta e Validação
 		String cpf = cpfField.getText().trim();
 		String nome = nameField.getText().trim();
 		String email = emailField.getText().trim();
@@ -36,7 +36,7 @@ public class terceiraTelaController {
 		String senha = passwordField.getText();
 		String confirmaSenha = confirmPasswordField.getText();
 
-		if (cpf.isEmpty() || nome.isEmpty() || email.isEmpty() || telefone.isEmpty() || senha.isEmpty()) {
+		if (cpf.isEmpty() || nome.isEmpty() || email.isEmpty() || telefone.isEmpty() || senha.isEmpty() || confirmaSenha.isEmpty()) {
 			exibirAlerta("Erro de Validação", "Todos os campos (incluindo CPF) são obrigatórios.");
 			return;
 		}
@@ -45,17 +45,18 @@ public class terceiraTelaController {
 			return;
 		}
 
-		// 2. Cria o objeto Modelo (POO)
+		//Cria o objeto Modelo
 		Cliente novoCliente = new Cliente();
 		novoCliente.setCPF(cpf);
 		novoCliente.setNome(nome);
 		novoCliente.setEmail(email);
 		novoCliente.setTelefone(telefone);
+		novoCliente.setSenha(senha);
 
-		// 3. Persistência (Chama o DAO via JDBC)
+		//Persistência no banco de dados
 		boolean sucesso = clienteDao.inserir(novoCliente);
 
-		// 4. Feedback e Navegação
+		//Feedback e Navegação
 		if (sucesso) {
 			exibirAlerta("Sucesso", "Cliente " + nome + " cadastrado com êxito!");
 			// Redireciona para a tela principal (lógica do App.setRoot)

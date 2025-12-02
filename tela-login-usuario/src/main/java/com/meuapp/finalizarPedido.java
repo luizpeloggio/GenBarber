@@ -59,8 +59,20 @@ public class finalizarPedido implements Initializable {
 	@FXML
 	private void ConfirmarPedido() throws IOException {
 
-		// 1. Coleta e Preparação dos Dados do Carrinho
-		double total = 0;
+		//Verificação de usuario logado
+		if (Sessao.getClienteLogado() == null) {
+			exibirAlerta("Erro", "Sessão expirada. Faça login novamente.");
+			App.setRoot("primary");
+			return;
+		}
+
+		//Coleta e Preparação dos Dados do Carrinho
+		if (Carrinho.getItens().isEmpty()) {
+			exibirAlerta("Erro", "O carrinho está vazio. Adicione serviços antes de confirmar.");
+			return;
+		}
+
+		double total = 0.0;
 		StringBuilder servicos = new StringBuilder();
 
 		for (Servico s : Carrinho.getItens()) {
@@ -68,51 +80,43 @@ public class finalizarPedido implements Initializable {
 			servicos.append(s.getNome()).append(", ");
 		}
 
-		if (Carrinho.getItens().isEmpty()) {
-			exibirAlerta("Erro", "O carrinho está vazio. Adicione serviços antes de confirmar.");
-			return;
+		if (servicos.length() > 0) {
+			servicos.setLength(servicos.length() - 2);
 		}
 
-		// Limpa a vírgula final
-		servicos.setLength(servicos.length() - 2);
-
-		// 2. Mapeamento Objeto (Agendamento) - POO
 		Agendamento novoAgendamento = new Agendamento();
 
-		// ** ID de Agendamento ** (Gerando um ID único aleatório)
 		novoAgendamento.setCod_Agendamento(new Random().nextInt(1000000) + 1);
 
-		// DADOS OBRIGATÓRIOS (Placeholders de teste)
-		novoAgendamento.setCPF("12345678911"); // CPF do cliente (TESTE)
-		novoAgendamento.setCNPJ("123421"); // CNPJ da Barbearia (TESTE)
+		//Dados do usuario logado
+		novoAgendamento.setCPF(Sessao.getClienteLogado().getCpf());
 
-		// Outros campos obrigatórios
-		novoAgendamento.setDate(new Date(System.currentTimeMillis())); // Data de hoje (usando java.sql.Date)
-		novoAgendamento.setHorario(new Time(System.currentTimeMillis())); // Hora atual (usando java.sql.Time)
-		novoAgendamento.setTipo_Pagamento(lblPagamento.getText()); // Pega o texto do Label
-		novoAgendamento.setID_Promocao(0); // Usa ID 0 para 'sem promoção'
+		novoAgendamento.setCNPJ("123421");
 
-		// Dados do Serviço
+		long agora = System.currentTimeMillis();
+		novoAgendamento.setDate(new java.sql.Date(agora));
+		novoAgendamento.setHorario(new java.sql.Time(agora));
+
+		novoAgendamento.setTipo_Pagamento(lblPagamento.getText());
+		novoAgendamento.setID_Promocao(0);
+
 		novoAgendamento.setTipo_Servico(servicos.toString());
+
 		novoAgendamento.setValor(total);
 
-		// 3. Persistência (Chama o DAO - CRUD CREATE)
 		AgendamentoDAO dao = new AgendamentoDAO();
+
 		boolean sucesso = dao.inserir(novoAgendamento);
 
-		// 4. Feedback e Limpeza
 		if (sucesso) {
-			Carrinho.limpar(); // Limpa o carrinho
-			exibirAlerta("Sucesso", "Agendamento confirmado e salvo no banco de dados!");
-
-			// Redireciona para a próxima tela
+			Carrinho.limpar();
+			exibirAlerta("Sucesso", "Agendamento confirmado com sucesso!");
 			App.setRoot("telaPrincipal-cliente");
 		} else {
-			exibirAlerta("Erro", "Falha ao registrar o agendamento no banco de dados. Verifique a conexão.");
+			exibirAlerta("Erro", "Falha ao registrar. Verifique se o banco de dados está rodando.");
 		}
 	}
 
-	// Método auxiliar para exibir Alertas
 	private void exibirAlerta(String titulo, String mensagem) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle(titulo);

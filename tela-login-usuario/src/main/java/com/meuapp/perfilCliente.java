@@ -114,4 +114,8 @@ public class perfilCliente {
     private void voltarPrincipalCliente(MouseEvent event) throws IOException {
         App.setRoot("telaPrincipal-cliente");
     }
+    @FXML
+    private void abrirMeuCadastro(MouseEvent event) throws IOException {
+        App.setRoot("perfil-cliente-cadastro");
+    }
 }
